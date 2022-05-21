@@ -119,4 +119,18 @@ public class StockMonitor : IStockMonitor
     }
 
     static decimal ParseDecimal(string value) => decimal.Parse(value.Replace("+", "").Replace("%", ""), NumberFormat);
+
+    public async Task Unsubscribe(string connectionId, string symbol, CancellationToken cancellationToken = default)
+    {
+        using var context = await _contextFactory.CreateDbContextAsync(cancellationToken);
+
+        // Per ogni connessione può esistere una sola sottoscrizione attiva. 
+        // Cancello l'eventuale sottoscrizione attiva per sostituirla.
+        var subscriptions = await context.Subscriptions.Where(s => s.ConnectionId == connectionId && s.Symbol == symbol).ToListAsync(cancellationToken);
+        context.Subscriptions.RemoveRange(subscriptions);
+
+        await context.SaveChangesAsync(cancellationToken);
+
+        _logger.LogInformation("{ConnectionId} unsubscribes {Symbol}", connectionId, symbol);
+    }
 }
