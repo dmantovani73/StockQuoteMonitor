@@ -8,7 +8,7 @@
         $("#percentage-change").val(quote == null ? null : quote.percentageChange + '%');
 		$("#delta-indicator").attr("src", quote == null ? null : "images/arrow_" + quote.deltaIndicator + ".png");
 
-		window.lastSalePrice = quote == null ? null : quote.lastSalePrice; + Utils.rand(-20, 20);
+		window.lastSalePrice = quote == null ? null : quote.lastSalePrice; //+ Utils.rand(-20, 20);
     }
 
     var connection = new signalR.HubConnectionBuilder().withUrl("/quoteHub").build();
