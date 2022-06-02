@@ -13,4 +13,6 @@ public class StockQuoteHub : Hub
     }
 
     public Task Subscribe(string symbol) => _monitor.Subscribe(Context.ConnectionId, symbol);
+
+    public Task Unsubscribe(string symbol) => _monitor.Unsubscribe(Context.ConnectionId, symbol);
 }

@@ -18,15 +18,21 @@
 
 @section Scripts {
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/min/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@1.8.0"></script>
     <script src="~/js/index.js" asp-append-version="true"></script>
 }
 
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">
             <input id="symbol" class="form-control" value="TSLA" />
         </div>
         <div class="col-md-1">
-            <button id="subscribe" class="btn btn-primary" disabled>Subscribe</button>
+            <button id="subscribe" class="btn btn-success" disabled>Subscribe</button>
+        </div>
+        <div class="col-md-1">
+            <button id="unsubscribe" class="btn btn-danger" disabled>Unsubscribe</button>
         </div>
     </div>
 
@@ -85,3 +91,5 @@
             </div>
         </form>
     </div>
+
+    <canvas id="myChart" width="1600" height="900"></canvas>
